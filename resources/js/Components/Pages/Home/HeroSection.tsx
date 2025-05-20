@@ -6,7 +6,7 @@ export const HeroSection = () => {
 
     return (
         <section className="bg-black relative px-[20px] md:px-[30px] lg:px-[40px] w-full h-full flex items-center justify-center">
-            <div className="flex-1 z-10">
+            <div className="flex-1 z-10 flex items-center justify-center">
                 <div className="max-w-[560px]">
                     <div className="sm:text-center lg:text-left">
                         <h1 className="flex flex-col gap-0">
@@ -22,7 +22,7 @@ export const HeroSection = () => {
                         <p className="mt-3 text-base text-zinc-400 opacity-80 sm:mt-5 text-[18px] max-w-[520px]">
                             Quest Up turns your everyday tasks into epic
                             adventures. Level up, gain skills, and unlock
-                            achievements as you conquer your daily quests.
+                            achievements as you conquer your quests.
                         </p>
                         <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                             <div
@@ -48,8 +48,7 @@ export const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="mt-12 absolute sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center flex-1 z-0">
-            </div>
+            <div className="absolute w-full h-full z-0 blur-md opacity-20" style={{background: "url(assets/system.webp"}}/>
         </section>
     );
 };

@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({ auth }) => {
             <div className="flex justify-between items-center h-16 px-4 lg:px-6 gap-20">
                 <div className="flex-shrink-0 flex items-center">
                     <span className="ml-2 text-[40px] font-bold bg-gradient-to-r from-blue-400 to-blue-900 text-transparent bg-clip-text font-poppins">
-                        QuestUp
+                        Q
                     </span>
                 </div>
                 <nav className="hidden md:ml-10 md:flex space-x-8">
