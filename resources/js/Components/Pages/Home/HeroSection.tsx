@@ -5,8 +5,8 @@ export const HeroSection = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <section className="bg-black relative px-[20px] md:px-[30px] lg:px-[40px]  w-full h-full flex items-center justify-center">
-            <div className="flex-1">
+        <section className="bg-black relative px-[20px] md:px-[30px] lg:px-[40px] w-full h-full flex items-center justify-center">
+            <div className="flex-1 z-10">
                 <div className="max-w-[560px]">
                     <div className="sm:text-center lg:text-left">
                         <h1 className="flex flex-col gap-0">
@@ -48,34 +48,7 @@ export const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center flex-1">
-                <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-                    <div className="relative block w-full bg-zinc-800 rounded-lg overflow-hidden">
-                        <img
-                            className="w-full"
-                            src="/placeholder.svg?height=400&width=600"
-                            alt="Quest Up App Screenshot"
-                        />
-                        <div className="absolute inset-0 bg-zinc-900 opacity-30"></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="bg-zinc-800/80 backdrop-blur-sm p-4 rounded-lg border border-purple-500/50">
-                                <div className="flex items-center space-x-2 mb-2">
-                                    <MoveUp className="h-5 w-5 text-purple-400" />
-                                    <span className="text-white font-bold">
-                                        LEVEL 7 ACHIEVED!
-                                    </span>
-                                </div>
-                                <div className="text-zinc-300 text-sm">
-                                    Productivity Mastery +3
-                                    <br />
-                                    Focus Duration +5
-                                    <br />
-                                    New Skill Unlocked: Time Bender
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="mt-12 absolute sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center flex-1 z-0">
             </div>
         </section>
     );

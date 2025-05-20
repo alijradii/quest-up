@@ -1,5 +1,6 @@
 "use client";
 import { Header } from "@/Components/Header";
+import { FeaturesSection } from "@/Components/Pages/Home/FeaturesSection";
 import { HeroSection } from "@/Components/Pages/Home/HeroSection";
 import type { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
@@ -32,107 +33,19 @@ export default function Welcome({ auth }: PageProps) {
                 {/* <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl opacity-20"></div>
                 <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-600/30 rounded-full blur-3xl opacity-20"></div> */}
 
-                <div className="relative flex min-h-screen flex-col">
-                    <main className="w-screen h-screen">
+                <div className="relative flex min-h-screen flex-col snap-y snap-mandatory overflow-y-scroll h-screen">
+                    <main className="w-screen min-h-screen max-h-screen snap-always snap-center overflow-hidden">
                         <Header auth={auth} />
                         <HeroSection />
                     </main>
 
+                    <FeaturesSection/>
+
                     <main className="flex-grow">
                         {/* Hero Section */}
                         {/* Features Section */}
-                        <section id="features" className="py-16 bg-zinc-800/50">
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <div className="lg:text-center">
-                                    <h2 className="text-base text-purple-400 font-semibold tracking-wide uppercase">
-                                        Features
-                                    </h2>
-                                    <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-                                        Unlock Your Potential
-                                    </p>
-                                    <p className="mt-4 max-w-2xl text-xl text-zinc-400 lg:mx-auto">
-                                        Quest Up provides everything you need to
-                                        transform your productivity into an epic
-                                        adventure.
-                                    </p>
-                                </div>
-
-                                <div className="mt-10">
-                                    <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-                                        <div className="relative">
-                                            <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-purple-500 to-blue-600 text-white">
-                                                <Trophy className="h-6 w-6" />
-                                            </div>
-                                            <div className="ml-16">
-                                                <h3 className="text-lg leading-6 font-medium text-white">
-                                                    Daily Quests
-                                                </h3>
-                                                <p className="mt-2 text-base text-zinc-400">
-                                                    Transform your to-do list
-                                                    into exciting quests with
-                                                    rewards and experience
-                                                    points.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="relative">
-                                            <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-purple-500 to-blue-600 text-white">
-                                                <LevelUp className="h-6 w-6" />
-                                            </div>
-                                            <div className="ml-16">
-                                                <h3 className="text-lg leading-6 font-medium text-white">
-                                                    Skill Trees
-                                                </h3>
-                                                <p className="mt-2 text-base text-zinc-400">
-                                                    Develop real-life skills as
-                                                    you level up and unlock new
-                                                    abilities in your personal
-                                                    skill tree.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="relative">
-                                            <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-purple-500 to-blue-600 text-white">
-                                                <Shield className="h-6 w-6" />
-                                            </div>
-                                            <div className="ml-16">
-                                                <h3 className="text-lg leading-6 font-medium text-white">
-                                                    Boss Battles
-                                                </h3>
-                                                <p className="mt-2 text-base text-zinc-400">
-                                                    Tackle your biggest
-                                                    challenges as epic boss
-                                                    battles and earn legendary
-                                                    rewards.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="relative">
-                                            <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-purple-500 to-blue-600 text-white">
-                                                <Award className="h-6 w-6" />
-                                            </div>
-                                            <div className="ml-16">
-                                                <h3 className="text-lg leading-6 font-medium text-white">
-                                                    Achievements
-                                                </h3>
-                                                <p className="mt-2 text-base text-zinc-400">
-                                                    Unlock badges and
-                                                    achievements as you build
-                                                    consistent habits and
-                                                    complete challenges.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
                         {/* How It Works */}
-                        <section id="how-it-works" className="py-16">
+                        <section id="how-it-works" className="py-16 snap-center snap-always">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                 <div className="lg:text-center">
                                     <h2 className="text-base text-purple-400 font-semibold tracking-wide uppercase">
