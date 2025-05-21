@@ -19,7 +19,7 @@ export const Header: React.FC<Props> = ({ auth }) => {
     return (
         <header className="border-b backdrop-blur-sm bg-black/90 sticky top-0 z-50">
             <div className="flex justify-between items-center h-16 px-4 lg:px-6 gap-20">
-                <div className="flex-shrink-0 flex items-center">
+                <div className="flex-shrink-0 flex items-center cursor-pointer">
                     <span className="ml-2 text-[40px] font-bold bg-gradient-to-r from-blue-400 to-blue-900 text-transparent bg-clip-text font-poppins">
                         Q
                     </span>

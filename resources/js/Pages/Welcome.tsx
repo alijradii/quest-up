@@ -30,13 +30,6 @@ export default function Welcome({ auth }: PageProps) {
         <>
             <Head title="Welcome" />
             <div className="text-zinc-100 min-h-screen">
-                {/* Animated background with subtle grid pattern */}
-                {/* <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div> */}
-
-                {/* Glowing accent elements */}
-                {/* <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl opacity-20"></div>
-                <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-600/30 rounded-full blur-3xl opacity-20"></div> */}
-
                 <div className="relative flex min-h-screen flex-col">
                     <main className="w-screen h-screen">
                         <Header auth={auth} />
