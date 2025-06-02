@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const routes = [
     { name: "Dashboard", route: "dashboard" },
-    { name: "Quests", route: "register" },
+    { name: "Quests", route: "quests" },
     { name: "Goals", route: "login" },
 ];
 
