@@ -4,35 +4,80 @@ import { Head } from "@inertiajs/react";
 import { DailyQuests } from "@/Components/Pages/Dashboard/DailyQuests";
 import { Quest } from "@/types/interfaces/Quest";
 import { PlayerStats } from "@/Components/Pages/Dashboard/PlayerStats";
-
+import { QuestOverview } from "@/Components/Pages/Dashboard/QuestOverview";
 const quests: Quest[] = [
     {
         id: 1,
-        title: "Morning Jog - 2km",
+        title: "Complete project proposal",
         status: "completed",
-        categories: ["health", "endurance"],
-        xp: 120,
+        description: "Finish the Q1 project proposal for the new client",
+        categories: ["work", "important"],
+        xp: 100,
+        difficulty: "hard",
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
     },
     {
         id: 2,
-        title: "Read 20 Pages of a Book",
+        title: "30 minute workout",
         status: "pending",
-        categories: ["intelligence", "discipline"],
-        xp: 90,
+        description: "Complete a full body workout session",
+        categories: ["health", "fitness"],
+        xp: 75,
+        difficulty: "medium",
+        createdAt: new Date(),
+        expiresAt: new Date(Date.now() + 12 * 60 * 60 * 1000),
+    },
+    {
+        id: 3,
+        title: "Read 20 pages",
+        status: "pending",
+        description: "Continue reading 'Atomic Habits'",
+        categories: ["learning", "personal"],
+        xp: 50,
+        difficulty: "easy",
+        createdAt: new Date(),
     },
     {
         id: 4,
-        title: "Meditation - 10 Minutes",
+        title: "Meditate for 10 minutes",
         status: "completed",
-        categories: ["time waster", "mental health"],
-        xp: 75,
+        description: "Practice mindfulness meditation",
+        categories: ["mindfulness", "health"],
+        xp: 30,
+        difficulty: "easy",
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
     },
     {
         id: 5,
-        title: "Write a Journal Entry",
-        status: "pending",
-        categories: ["creativity", "reflection"],
+        title: "Plan meals for the week",
+        status: "expired",
+        description: "Create a healthy meal plan for the upcoming week",
+        categories: ["organization", "health"],
+        xp: 60,
+        difficulty: "medium",
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        expiresAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    },
+    {
+        id: 6,
+        title: "Learn new programming concept",
+        status: "completed",
+        description: "Study React Server Components",
+        categories: ["learning", "programming"],
         xp: 80,
+        difficulty: "medium",
+        createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
+    },
+    {
+        id: 7,
+        title: "Clean workspace",
+        status: "pending",
+        description: "Organize and clean the home office",
+        categories: ["organization", "productivity"],
+        xp: 40,
+        difficulty: "easy",
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
     },
 ];
 
@@ -46,7 +91,7 @@ export default function Dashboard() {
                 {/* Main Grid */}
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* Today's Quests */}
-                    <DailyQuests quests={quests} />
+                    <QuestOverview quests={quests} />
                     <PlayerStats />
                 </div>
             </div>
