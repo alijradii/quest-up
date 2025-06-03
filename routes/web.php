@@ -23,6 +23,11 @@ Route::get('/quests', function () {
     return Inertia::render('Quests');
 })->middleware(['auth', 'verified'])->name('quests');
 
+
+Route::get('/leaderboard', function () {
+    return Inertia::render('Leaderboard');
+})->middleware(['auth', 'verified'])->name('leaderboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

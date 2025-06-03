@@ -11,7 +11,7 @@ import { useState } from "react";
 const routes = [
     { name: "Dashboard", route: "dashboard" },
     { name: "Quests", route: "quests" },
-    { name: "Goals", route: "login" },
+    { name: "Leaderboard", route: "leaderboard" },
 ];
 
 export const Navbar: React.FC = () => {
