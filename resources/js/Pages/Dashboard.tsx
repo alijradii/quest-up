@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 
 import { DailyQuests } from "@/Components/Pages/Dashboard/DailyQuests";
 import { Quest } from "@/types/interfaces/Quest";
-import { PlayerStats } from "@/Components/Pages/Dashboard/PlayerStats";
+import { PlayerProfileCard } from "@/Components/Pages/Dashboard/PlayerProfile";
 import { QuestOverview } from "@/Components/Pages/Dashboard/QuestOverview";
 const quests: Quest[] = [
     {
@@ -92,7 +92,7 @@ export default function Dashboard() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* Today's Quests */}
                     <QuestOverview quests={quests} />
-                    <PlayerStats />
+                    <PlayerProfileCard />
                 </div>
             </div>
         </AuthenticatedLayout>
