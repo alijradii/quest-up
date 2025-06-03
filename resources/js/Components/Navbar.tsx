@@ -12,6 +12,7 @@ const routes = [
     { name: "Dashboard", route: "dashboard" },
     { name: "Quests", route: "quests" },
     { name: "Leaderboard", route: "leaderboard" },
+    { name: "Admin", route: "admin" },
 ];
 
 export const Navbar: React.FC = () => {
