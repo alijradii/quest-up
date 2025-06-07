@@ -22,7 +22,7 @@ Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'ind
 Route::middleware(['auth'])->prefix('quests')->name('quests.')->group(function () {
     Route::get('/dashboard', [QuestController::class, 'index'])->name('index');
     Route::post('/create', [QuestController::class, 'createQuest'])->name('create');
-    Route::put('/quests/{quest}', [QuestController::class, 'updateQuest'])->name('update');
+    Route::put('/{quest}', [QuestController::class, 'updateQuest'])->name('update');
 });
 
 

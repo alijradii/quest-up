@@ -45,7 +45,7 @@ export function QuestForm({
         description: quest.description || "",
         difficulty: quest.difficulty || "medium",
         categories: quest.categories || [],
-        expire_at: quest.expire_at || "",
+        expire_at: new Date(quest.expire_at || ""),
     });
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export function QuestForm({
                 description: quest.description || "",
                 difficulty: quest.difficulty || "medium",
                 categories: quest.categories || [],
-                expire_at: quest.expire_at || "",
+                expire_at: new Date(quest.expire_at || ""),
             });
         }
     }, [open, quest]);
@@ -78,7 +78,7 @@ export function QuestForm({
 
     const addCategory = () => {
         if (newCategory.trim()) {
-            const updated = [...data.categories, newCategory.trim()];
+            const updated = [...data.categories, { name: newCategory.trim() }];
             setData("categories", updated);
             setNewCategory("");
             setQuest((prev) => ({
@@ -90,7 +90,7 @@ export function QuestForm({
 
     const removeCategory = (categoryToRemove: string) => {
         const updated = data.categories.filter(
-            (cat) => cat !== categoryToRemove
+            (cat) => cat.name !== categoryToRemove
         );
         setData("categories", updated);
         setQuest((prev) => ({
@@ -188,15 +188,15 @@ export function QuestForm({
                             <div className="flex flex-wrap gap-2 mb-2">
                                 {data.categories.map((category) => (
                                     <Badge
-                                        key={category}
+                                        key={category.name}
                                         variant="secondary"
                                         className="flex items-center gap-1 px-2 py-1"
                                     >
-                                        {category}
+                                        {category.name}
                                         <X
                                             className="h-3 w-3 cursor-pointer"
                                             onClick={() =>
-                                                removeCategory(category)
+                                                removeCategory(category.name)
                                             }
                                         />
                                     </Badge>
@@ -230,10 +230,23 @@ export function QuestForm({
                             <Input
                                 id="expireAt"
                                 type="datetime-local"
-                                value={data.expire_at}
-                                onChange={(e) =>
-                                    setData("expire_at", e.target.value)
+                                value={
+                                    data.expire_at &&
+                                    !isNaN(new Date(data.expire_at).getTime())
+                                        ? new Date(data.expire_at)
+                                              .toISOString()
+                                              .slice(0, 16)
+                                        : ""
                                 }
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                    const date = new Date(inputValue);
+                                    if (!isNaN(date.getTime())) {
+                                        setData("expire_at", new Date(inputValue));
+                                    } else {
+                                        setData("expire_at", new Date());
+                                    }
+                                }}
                             />
                         </div>
                     </div>
