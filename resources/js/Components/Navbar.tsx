@@ -57,7 +57,7 @@ export const Navbar: React.FC = () => {
                                         >
                                             <Fire className="h-4 w-4" />
                                             <span className="font-bold">
-                                                42
+                                                {user.current_streak}
                                             </span>
                                         </Badge>
                                         <Button

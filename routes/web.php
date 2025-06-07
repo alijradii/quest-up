@@ -19,16 +19,16 @@ Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'ind
 
 Route::get('/quests', function () {
     return Inertia::render('Quests');
-})->middleware(['auth', 'verified'])->name('quests');
+})->middleware(['auth'])->name('quests');
 
 
 Route::get('/leaderboard', function () {
     return Inertia::render('Leaderboard');
-})->middleware(['auth', 'verified'])->name('leaderboard');
+})->middleware(['auth'])->name('leaderboard');
 
 Route::get('/admin', function () {
     return Inertia::render('Admin');
-})->middleware(['auth', 'verified'])->name('admin');
+})->middleware(['auth'])->name('admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

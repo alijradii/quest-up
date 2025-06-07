@@ -1,15 +1,17 @@
 export interface Quest {
     id: number;
+    user_id: number;
+
     title: string;
-    status: "pending" | "completed" | "expired";
+    status: "pending" | "complete" | "expired";
 
-    description: string;
-    categories: string[];
-    xp: number;
-
-    expiresAt?: Date;
-    createdAt?: Date;
-    completedAt?: Date;
-
+    description: string | null;
     difficulty: "easy" | "medium" | "hard";
+
+    completedAt: string | null;
+    expireAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+
+    categories?: string[];
 }

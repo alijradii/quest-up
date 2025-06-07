@@ -18,7 +18,7 @@ interface QuestOverviewProps {
 
 export function QuestOverview({ quests }: QuestOverviewProps) {
     const completedQuests = quests.filter(
-        (quest) => quest.status === "completed"
+        (quest) => quest.status === "complete"
     ).length;
     const totalQuests = quests.length;
     const progressPercentage = Math.round(
@@ -26,9 +26,9 @@ export function QuestOverview({ quests }: QuestOverviewProps) {
     );
 
     quests.sort((a: Quest, b:Quest) => {
-      if(!a.expiresAt) return 1;
+      if(!a.expireAt) return 1;
 
-      if(!b.expiresAt || a.expiresAt < b.expiresAt) return -1;
+      if(!b.expireAt || a.expireAt < b.expireAt) return -1;
 
       return 1;
     });
