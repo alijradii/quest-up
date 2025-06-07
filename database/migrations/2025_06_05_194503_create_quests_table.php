@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,13 +15,14 @@ return new class extends Migration
             $table->string('title');
             $table->enum('status', ['pending', 'complete', 'expired'])->default('pending');
             $table->text('description')->nullable();
-            $table->json('categories')->nullable();
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->default('easy');
             $table->timestamp('completedAt')->nullable();
             $table->timestamp('expireAt')->nullable();
             $table->timestamps();
-            $table->foreignId('userId')->constrained()->onDelete('cascade');
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Changed to Breeze convention
         });
+
     }
 
     /**
