@@ -6,9 +6,14 @@ use App\Models\Quest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class QuestController extends Controller
 {
+
     public function createQuest(Request $request)
     {
         $validated = $request->validate([
@@ -24,13 +29,28 @@ class QuestController extends Controller
             'user_id' => Auth::id(),
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
-            'categories' => $validated['categories'] ?? [],
             'difficulty' => $validated['difficulty'],
             'expire_at' => $validated['expire_at'] ?? null,
         ]);
 
-        return response()->json($quest, 201);
+        if (!empty($validated['categories'])) {
+            $categoryIds = [];
+
+            foreach ($validated['categories'] as $categoryName) {
+                $category = Category::firstOrCreate(
+                    ['name' => Str::lower(trim($categoryName))],
+                    ['name' => trim($categoryName)]
+                );
+
+                $categoryIds[] = $category->id;
+            }
+
+            $quest->categories()->sync($categoryIds);
+        }
+
+        return redirect('/dashboard')->with('success', 'Quest created successfully!');
     }
+
 
     public function updateQuest(Request $request, Quest $quest)
     {
@@ -51,7 +71,7 @@ class QuestController extends Controller
 
         $quest->update($validated);
 
-        return response()->json($quest);
+        return redirect('/dashboard')->with('success', 'Quest upated successfully!');
     }
 
     public function getQuest(Quest $quest)
@@ -91,5 +111,13 @@ class QuestController extends Controller
 
         $quests = Quest::where('user_id', $userId)->get();
         return response()->json($quests);
+    }
+
+    public function index()
+    {
+        return Inertia::render('Quests', [
+            'user' => Auth::user(),
+            'quests' => Quest::questsForUser(Auth::id()),
+        ]);
     }
 }

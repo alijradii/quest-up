@@ -26,9 +26,9 @@ export function QuestOverview({ quests }: QuestOverviewProps) {
     );
 
     quests.sort((a: Quest, b:Quest) => {
-      if(!a.expireAt) return 1;
+      if(!a.expire_at) return 1;
 
-      if(!b.expireAt || a.expireAt < b.expireAt) return -1;
+      if(!b.expire_at || a.expire_at < b.expire_at) return -1;
 
       return 1;
     });

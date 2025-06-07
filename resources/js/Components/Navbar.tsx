@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const routes = [
     { name: "Dashboard", route: "dashboard" },
-    { name: "Quests", route: "quests" },
+    { name: "Quests", route: "quests.index" },
     { name: "Leaderboard", route: "leaderboard" },
     { name: "Admin", route: "admin" },
 ];
@@ -38,6 +38,7 @@ export const Navbar: React.FC = () => {
                                     <NavLink
                                         href={route(r.route)}
                                         active={route().current(r.route)}
+                                        key={r.name}
                                     >
                                         {r.name}
                                     </NavLink>

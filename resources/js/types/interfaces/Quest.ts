@@ -9,9 +9,9 @@ export interface Quest {
     difficulty: "easy" | "medium" | "hard";
 
     completedAt: string | null;
-    expireAt: string | null;
-    createdAt: string;
-    updatedAt: string;
+    expire_at: string | null;
+    created_at: string;
+    updated_at: string;
 
     categories?: string[];
 }

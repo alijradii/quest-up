@@ -27,8 +27,8 @@ class Quest extends Model
         'description',
         'status',
         'difficulty',
-        'completedAt',
-        'expireAt',
+        'completed_at',
+        'expire_at',
         'user_id',
     ];
 
@@ -36,8 +36,9 @@ class Quest extends Model
      * The attributes that should be cast to native types.
      */
     protected $casts = [
-        'completedAt' => 'datetime',
-        'expireAt' => 'datetime',
+        'completed_at' => 'datetime',
+        'expire_at' => 'datetime',
+        'categories' => 'array',
     ];
 
     /**
@@ -70,7 +71,7 @@ class Quest extends Model
     public function markAsComplete(): void
     {
         $this->status = self::STATUS_COMPLETE;
-        $this->completedAt = now();
+        $this->completed_at = now();
         $this->save();
     }
 
@@ -81,9 +82,14 @@ class Quest extends Model
         return self::where('user_id', $userId)
             ->where(function ($query) use ($today) {
                 $query->where('status', 'pending')
-                    ->orWhereDate('completedAt', $today)
-                    ->orWhereDate('expireAt', $today);
+                    ->orWhereDate('completed_at', $today)
+                    ->orWhereDate('expire_at', $today);
             })
             ->get();
+    }
+
+    public static function questsForUser($userId)
+    {
+        return self::where('user_id', $userId)->get();
     }
 }

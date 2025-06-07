@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const DailyQuests: React.FC<Props> = ({ quests }) => {
-    const completedQuests = quests.filter((q) => q.status === "completed");
+    const completedQuests = quests.filter((q) => q.status === "complete");
 
     return (
         <Card className="col-span-full lg:col-span-2 border-border/40 bg-card/50 backdrop-blur-md">
@@ -51,7 +51,7 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                             className="flex items-center justify-between p-3 rounded-lg bg-card border border-border/40"
                         >
                             <div className="flex items-center gap-3">
-                                {quest.status === "completed" ? (
+                                {quest.status === "complete" ? (
                                     <CheckCircle2 className="h-5 w-5 text-primary" />
                                 ) : (
                                     <Circle className="h-5 w-5 text-muted-foreground" />
@@ -59,7 +59,7 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                                 <div>
                                     <p
                                         className={`font-medium ${
-                                            quest.status === "completed"
+                                            quest.status === "complete"
                                                 ? "line-through text-muted-foreground"
                                                 : ""
                                         }`}
@@ -67,7 +67,7 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                                         {quest.title}
                                     </p>
                                     <div className="flex gap-2 mt-2">
-                                        {quest.categories.map((c) => {
+                                        {quest.categories && quest.categories.map((c) => {
                                             return (
                                                 <Badge
                                                     variant="secondary"
@@ -81,11 +81,6 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span
-                                    className={`text-sm font-bold ${quest.status=== "completed"? "text-emerald-500": "text-gray-300"}`}
-                                >
-                                    +{quest.xp} XP
-                                </span>
                                 <Button
                                     size="sm"
                                     variant="ghost"

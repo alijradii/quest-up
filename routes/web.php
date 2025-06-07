@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QuestController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,9 +19,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/quests', function () {
-    return Inertia::render('Quests');
-})->middleware(['auth'])->name('quests');
+Route::middleware(['auth'])->prefix('quests')->name('quests.')->group(function () {
+    Route::get('/dashboard', [QuestController::class, 'index'])->name('index');
+    Route::post('/create', [QuestController::class, 'createQuest'])->name('create');
+    Route::put('/quests/{quest}', [QuestController::class, 'updateQuest'])->name('update');
+});
 
 
 Route::get('/leaderboard', function () {
