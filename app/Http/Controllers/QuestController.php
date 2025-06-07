@@ -64,11 +64,11 @@ class QuestController extends Controller
     }
 
 
-    public function getActiveQuests()
+    public function getActiveQuests($userId)
     {
         $today = Carbon::today();
 
-        $quests = Quest::where('user_id', Auth::id())
+        $quests = Quest::where('user_id', $userId)
             ->where(function ($query) use ($today) {
                 $query->where('status', 'pending')
                     ->orWhereDate('completed_at', $today)

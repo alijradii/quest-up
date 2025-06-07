@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -71,5 +72,18 @@ class Quest extends Model
         $this->status = self::STATUS_COMPLETE;
         $this->completedAt = now();
         $this->save();
+    }
+
+    public static function activeForUser($userId)
+    {
+        $today = Carbon::today();
+
+        return self::where('user_id', $userId)
+            ->where(function ($query) use ($today) {
+                $query->where('status', 'pending')
+                    ->orWhereDate('completedAt', $today)
+                    ->orWhereDate('expireAt', $today);
+            })
+            ->get();
     }
 }

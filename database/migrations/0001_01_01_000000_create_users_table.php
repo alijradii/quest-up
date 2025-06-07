@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
+            $table->string('name');
             $table->enum('role', ['user', 'admin'])->default('user');
-            $table->string('display_name');
             $table->unsignedInteger('level')->default(1);
             $table->unsignedInteger('completed_quests')->default(0);
             $table->unsignedInteger('current_streak')->default(0);
