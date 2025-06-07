@@ -79,7 +79,8 @@ class Quest extends Model
     {
         $today = Carbon::today();
 
-        return self::where('user_id', $userId)
+        return self::with('categories')
+            ->where('user_id', $userId)
             ->where(function ($query) use ($today) {
                 $query->where('status', 'pending')
                     ->orWhereDate('completed_at', $today)
@@ -90,6 +91,6 @@ class Quest extends Model
 
     public static function questsForUser($userId)
     {
-        return self::where('user_id', $userId)->get();
+        return self::with('categories')->where('user_id', $userId)->get();
     }
 }

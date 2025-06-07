@@ -59,11 +59,11 @@ export function QuestCard({
                                 {quest.categories &&
                                     quest.categories.map((category) => (
                                         <Badge
-                                            key={category}
+                                            key={category.name}
                                             variant="secondary"
                                             className="text-xs"
                                         >
-                                            {category}
+                                            {category.name}
                                         </Badge>
                                     ))}
                                 {quest.created_at && (

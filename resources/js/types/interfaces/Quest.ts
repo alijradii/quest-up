@@ -13,5 +13,5 @@ export interface Quest {
     created_at: string;
     updated_at: string;
 
-    categories?: string[];
+    categories?: {name: string}[];
 }

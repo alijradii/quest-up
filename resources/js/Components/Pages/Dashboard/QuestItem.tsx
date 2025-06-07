@@ -109,11 +109,11 @@ export function QuestItem({ quest }: QuestItemProps) {
                             {quest.categories &&
                                 quest.categories.slice(0, 3).map((category) => (
                                     <Badge
-                                        key={category}
+                                        key={category.name}
                                         variant="secondary"
                                         className="text-xs px-2 py-0.5 bg-secondary/50"
                                     >
-                                        {category}
+                                        {category.name}
                                     </Badge>
                                 ))}
 
