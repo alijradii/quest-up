@@ -127,7 +127,7 @@ export function QuestItem({ quest }: QuestItemProps) {
                                     </Badge>
                                 )}
 
-                            {timeInfo && (
+                            {timeInfo && quest.status !== "complete" && (
                                 <div
                                     className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md ${
                                         timeInfo.isExpired
@@ -145,6 +145,14 @@ export function QuestItem({ quest }: QuestItemProps) {
                                     <span className="font-medium">
                                         {timeInfo.text}
                                     </span>
+                                </div>
+                            )}
+
+                            {quest.status === "complete" && (
+                                <div
+                                    className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md text-emerald-500 bg-green-950 border border-emerald-500`}
+                                >
+                                    Completed
                                 </div>
                             )}
                         </div>

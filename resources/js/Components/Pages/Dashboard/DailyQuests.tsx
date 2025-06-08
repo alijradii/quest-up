@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowUpRight, CheckCircle2, Circle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "@inertiajs/react";
 
 interface Props {
     quests: Quest[];
@@ -36,8 +37,9 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                             {completedQuests.length} completed
                         </span>
                         <Progress
-                            value={100 * completedQuests.length / quests.length}
-
+                            value={
+                                (100 * completedQuests.length) / quests.length
+                            }
                             className="w-24 h-2 bg-muted"
                         />
                     </div>
@@ -67,16 +69,17 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                                         {quest.title}
                                     </p>
                                     <div className="flex gap-2 mt-2">
-                                        {quest.categories && quest.categories.map((c) => {
-                                            return (
-                                                <Badge
-                                                    variant="secondary"
-                                                    className="mt-1 text-xs"
-                                                >
-                                                    {c}
-                                                </Badge>
-                                            );
-                                        })}
+                                        {quest.categories &&
+                                            quest.categories.map((c) => {
+                                                return (
+                                                    <Badge
+                                                        variant="secondary"
+                                                        className="mt-1 text-xs"
+                                                    >
+                                                        {c.name}
+                                                    </Badge>
+                                                );
+                                            })}
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +98,11 @@ export const DailyQuests: React.FC<Props> = ({ quests }) => {
                 </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-                <Button variant="outline">View All Quests</Button>
+                <Button variant="outline">
+                    <Link href={route("quests.index")}>
+                        View All Quests
+                    </Link>
+                </Button>
                 <Button>Add New Quest</Button>
             </CardFooter>
         </Card>

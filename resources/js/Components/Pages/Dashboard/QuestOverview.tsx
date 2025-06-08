@@ -25,12 +25,12 @@ export function QuestOverview({ quests }: QuestOverviewProps) {
         (completedQuests / totalQuests) * 100
     );
 
-    quests.sort((a: Quest, b:Quest) => {
-      if(!a.expire_at) return 1;
+    quests.sort((a: Quest, b: Quest) => {
+        if (!a.expire_at) return 1;
 
-      if(!b.expire_at || a.expire_at < b.expire_at) return -1;
+        if (!b.expire_at || a.expire_at < b.expire_at) return -1;
 
-      return 1;
+        return 1;
     });
 
     return (
@@ -64,10 +64,10 @@ export function QuestOverview({ quests }: QuestOverviewProps) {
                 </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-                <Link href="/quests">
+                <Link href={route("quests.index")}>
                     <Button variant="outline">View All Quests</Button>
                 </Link>
-                <Link href="/quests?new=true">
+                <Link href={route("quests.index")}>
                     <Button>Add New Quest</Button>
                 </Link>
             </CardFooter>
