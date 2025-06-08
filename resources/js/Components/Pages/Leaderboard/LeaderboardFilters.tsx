@@ -1,13 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Search, Users } from "lucide-react";
 
 interface LeaderboardFiltersProps {
@@ -21,10 +13,6 @@ interface LeaderboardFiltersProps {
 }
 
 export function LeaderboardFilters({
-    timeframe,
-    setTimeframe,
-    sortBy,
-    setSortBy,
     searchTerm,
     setSearchTerm,
     totalUsers,
