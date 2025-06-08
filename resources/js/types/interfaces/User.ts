@@ -1,29 +1,4 @@
-export interface User {
-  id: number
-  username: string
-  displayName: string
-  avatar?: string
-  level: number
-  totalXP: number
-  xpToNextLevel: number
-  currentLevelXP: number
-  stats: {
-    agility: number
-    strength: number
-    intelligence: number
-    vitality: number
-  }
-  questsCompleted: number
-  habitsCompleted: number
-  currentStreak: number
-  bestStreak: number
-  joinedAt: Date
-  lastActive: Date
-  badges: string[]
-  rank: number
-  weeklyXP: number
-  monthlyXP: number
-}
+import {User} from "@/types"
 
 export interface LeaderboardEntry {
   user: User

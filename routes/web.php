@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestController;
 
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,10 +26,7 @@ Route::middleware(['auth'])->prefix('quests')->name('quests.')->group(function (
     Route::put('/{quest}', [QuestController::class, 'updateQuest'])->name('update');
 });
 
-
-Route::get('/leaderboard', function () {
-    return Inertia::render('Leaderboard');
-})->middleware(['auth'])->name('leaderboard');
+Route::middleware(['auth'])->get('/leaderboard', [UserController::class, 'index'])->name('leaderboard');
 
 Route::get('/admin', function () {
     return Inertia::render('Admin');

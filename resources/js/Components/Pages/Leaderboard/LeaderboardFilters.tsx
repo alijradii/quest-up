@@ -76,19 +76,6 @@ export function LeaderboardFilters({
                 Weekly
               </Button>
             </div>
-
-            {/* Sort by */}
-            <Select value={sortBy} onValueChange={(value: "xp" | "quests" | "level" | "streak") => setSortBy(value)}>
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="xp">XP</SelectItem>
-                <SelectItem value="quests">Quests</SelectItem>
-                <SelectItem value="level">Level</SelectItem>
-                <SelectItem value="streak">Streak</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </div>
       </CardContent>

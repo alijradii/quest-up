@@ -1,29 +1,18 @@
 import type React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Crown, FlameIcon as Fire, Target, Trophy, TrendingUp, Users } from "lucide-react"
-import type { User } from "@/types/interfaces/User"
+import { User } from "@/types"
 
 interface LeaderboardStatsProps {
   users: User[]
   currentUser?: User
-  timeframe: "all" | "weekly" | "monthly"
 }
 
-export function LeaderboardStats({ users, currentUser, timeframe }: LeaderboardStatsProps) {
+export function LeaderboardStats({ users, currentUser }: LeaderboardStatsProps) {
   const topUser = users[0]
-  const totalQuests = users.reduce((sum, user) => sum + user.questsCompleted, 0)
-  const totalXP = users.reduce((sum, user) => {
-    switch (timeframe) {
-      case "weekly":
-        return sum + user.weeklyXP
-      case "monthly":
-        return sum + user.monthlyXP
-      default:
-        return sum + user.totalXP
-    }
-  }, 0)
+  const totalQuests = users.reduce((sum, user) => sum + user.completed_quests, 0)
   const averageLevel = Math.round(users.reduce((sum, user) => sum + user.level, 0) / users.length)
-  const longestStreak = Math.max(...users.map((user) => user.bestStreak))
+  const longestStreak = Math.max(...users.map((user) => user.best_streak))
 
   const currentUserRank = currentUser ? users.findIndex((u) => u.id === currentUser.id) + 1 : null
 
@@ -36,7 +25,7 @@ export function LeaderboardStats({ users, currentUser, timeframe }: LeaderboardS
       />
       <StatCard
         title="Leading Champion"
-        value={topUser?.displayName || "None"}
+        value={topUser?.name || "None"}
         icon={<Crown className="h-4 w-4 text-yellow-400" />}
         valueClassName="text-yellow-400 text-lg"
         subtitle={`Level ${topUser?.level || 0}`}
