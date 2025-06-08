@@ -24,7 +24,7 @@ export default function QuestLogs({ quests, user }: Props) {
     const [newQuest, setNewQuest] = useState<Partial<Quest>>({
         title: "",
         description: "",
-        categories: [] as string[],
+        categories: [],
         difficulty: "medium" as Quest["difficulty"],
         expire_at: "",
     });
@@ -37,7 +37,7 @@ export default function QuestLogs({ quests, user }: Props) {
                 (quest.description?.toLowerCase().includes(lowerSearch) ??
                     false) ||
                 (quest.categories?.some((cat) =>
-                    cat.toLowerCase().includes(lowerSearch)
+                    cat.name.toLowerCase().includes(lowerSearch)
                 ) ??
                     false);
 
@@ -131,7 +131,7 @@ export default function QuestLogs({ quests, user }: Props) {
                         setNewQuest({
                             title: "",
                             description: "",
-                            categories: [] as string[],
+                            categories: [],
                             difficulty: "medium" as Quest["difficulty"],
                             expire_at: "",
                         });

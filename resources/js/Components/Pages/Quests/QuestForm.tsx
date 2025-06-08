@@ -41,6 +41,7 @@ export function QuestForm({
     const [newCategory, setNewCategory] = useState("");
 
     const { data, setData, post, put, processing, errors, reset } = useForm({
+        id: quest.id,
         title: quest.title || "",
         description: quest.description || "",
         difficulty: quest.difficulty || "medium",
@@ -51,6 +52,7 @@ export function QuestForm({
     useEffect(() => {
         if (open) {
             setData({
+                id: quest.id,
                 title: quest.title || "",
                 description: quest.description || "",
                 difficulty: quest.difficulty || "medium",
@@ -68,10 +70,15 @@ export function QuestForm({
             ? route("quests.update", quest.id)
             : route("quests.create");
 
+        console.log(e.target)
+
         method(routeName, {
             onSuccess: () => {
                 reset();
                 onOpenChange(false);
+            },
+            onError: (err) => {
+                console.log(err);
             },
         });
     };
@@ -182,7 +189,6 @@ export function QuestForm({
                             </div>
                         </div>
 
-                        {/* Category and expiration inputs stay the same */}
                         <div className="grid gap-2">
                             <Label htmlFor="categories">Categories</Label>
                             <div className="flex flex-wrap gap-2 mb-2">
@@ -242,7 +248,10 @@ export function QuestForm({
                                     const inputValue = e.target.value;
                                     const date = new Date(inputValue);
                                     if (!isNaN(date.getTime())) {
-                                        setData("expire_at", new Date(inputValue));
+                                        setData(
+                                            "expire_at",
+                                            new Date(inputValue)
+                                        );
                                     } else {
                                         setData("expire_at", new Date());
                                     }

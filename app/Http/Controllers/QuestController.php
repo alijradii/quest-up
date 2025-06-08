@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 use App\Models\Category;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class QuestController extends Controller
@@ -20,7 +21,7 @@ class QuestController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'categories' => 'nullable|array',
-            'categories.*' => 'string',
+            'categories.*.name' => 'required|string|max:255',
             'difficulty' => 'required|in:easy,medium,hard',
             'expire_at' => 'nullable|date',
         ]);
@@ -36,13 +37,13 @@ class QuestController extends Controller
         if (!empty($validated['categories'])) {
             $categoryIds = [];
 
-            foreach ($validated['categories'] as $categoryName) {
-                $category = Category::firstOrCreate(
-                    ['name' => Str::lower(trim($categoryName))],
-                    ['name' => trim($categoryName)]
+            foreach ($validated['categories'] as $category) {
+                $name = trim($category['name']);
+                $categoryModel = Category::firstOrCreate(
+                    ['name' => Str::lower($name)],
+                    ['name' => $name]
                 );
-
-                $categoryIds[] = $category->id;
+                $categoryIds[] = $categoryModel->id;
             }
 
             $quest->categories()->sync($categoryIds);
@@ -50,8 +51,6 @@ class QuestController extends Controller
 
         return redirect('/dashboard')->with('success', 'Quest created successfully!');
     }
-
-
     public function updateQuest(Request $request, Quest $quest)
     {
         if ($quest->user_id !== Auth::id()) {
@@ -59,20 +58,34 @@ class QuestController extends Controller
         }
 
         $validated = $request->validate([
-            'title' => 'sometimes|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'categories' => 'nullable|array',
-            'categories.*' => 'string',
-            'difficulty' => 'in:easy,medium,hard',
-            'status' => 'in:pending,complete,expired',
-            'completed_at' => 'nullable|date',
+            'categories.*.name' => 'required|string|max:255',
+            'difficulty' => 'required|in:easy,medium,hard',
             'expire_at' => 'nullable|date',
         ]);
 
-        $quest->update($validated);
+        $categoryIds = [];
 
-        return redirect('/dashboard')->with('success', 'Quest upated successfully!');
+        if (!empty($validated['categories'])) {
+            foreach ($validated['categories'] as $category) {
+                $name = trim($category['name']);
+                $categoryModel = Category::firstOrCreate(
+                    ['name' => Str::lower($name)],
+                    ['name' => $name]
+                );
+                $categoryIds[] = $categoryModel->id;
+            }
+        }
+
+        $quest->categories()->sync($categoryIds);
+        $quest->update(Arr::except($validated, ['categories']));
+
+        return redirect('/dashboard')->with('success', 'Quest updated successfully!');
     }
+
+
 
     public function getQuest(Quest $quest)
     {
