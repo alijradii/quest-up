@@ -96,6 +96,16 @@ class QuestController extends Controller
         return response()->json($quest);
     }
 
+    public function deleteQuest(Quest $quest)
+{
+    if ($quest->user_id !== Auth::id()) {
+        return response()->json(['message' => 'Unauthorized'], 403);
+    }
+
+    $quest->delete();
+
+    return redirect('/dashboard')->with('success', 'Quest deleted successfully!');
+}
 
     public function getActiveQuests($userId)
     {
