@@ -33,7 +33,7 @@ Route::middleware(['auth'])->get('/leaderboard', [UserController::class, 'index'
 
 Route::middleware(['auth'])->get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-Route::middleware(['auth'])->post('/admin', [AdminController::class, 'banUser'])->name('admin.ban');
+Route::middleware(['auth'])->post('/admin/{user}', [AdminController::class, 'banUser'])->name('admin.ban');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

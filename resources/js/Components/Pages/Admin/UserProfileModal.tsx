@@ -269,7 +269,7 @@ export function UserProfileModal({
 
                     {/* Actions */}
                     <div className="flex justify-end gap-2">
-                        <form>
+                        <form method="POST" action={route("admin.ban", user.id)}>
                             <Button disabled={disabled} variant="destructive" type="submit">
                                 Ban User
                             </Button>
