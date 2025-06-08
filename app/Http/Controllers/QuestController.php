@@ -97,15 +97,27 @@ class QuestController extends Controller
     }
 
     public function deleteQuest(Quest $quest)
-{
-    if ($quest->user_id !== Auth::id()) {
-        return response()->json(['message' => 'Unauthorized'], 403);
+    {
+        if ($quest->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $quest->delete();
+
+        return redirect('/dashboard')->with('success', 'Quest deleted successfully!');
     }
 
-    $quest->delete();
+    public function completeQuest(Quest $quest)
+    {
+        if ($quest->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
-    return redirect('/dashboard')->with('success', 'Quest deleted successfully!');
-}
+        $quest->status = 'complete';
+        $quest->save();
+
+        return redirect('/dashboard')->with('success', 'Quest updated successfully!');
+    }
 
     public function getActiveQuests($userId)
     {

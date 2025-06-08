@@ -25,6 +25,7 @@ Route::middleware(['auth'])->prefix('quests')->name('quests.')->group(function (
     Route::post('/create', [QuestController::class, 'createQuest'])->name('create');
     Route::put('/{quest}', [QuestController::class, 'updateQuest'])->name('update');
     Route::delete('/{quest}', [QuestController::class, 'deleteQuest'])->name('delete');
+      Route::put('/{quest}/complete', [QuestController::class, 'completeQuest'])->name('complete');
 });
 
 Route::middleware(['auth'])->get('/leaderboard', [UserController::class, 'index'])->name('leaderboard');

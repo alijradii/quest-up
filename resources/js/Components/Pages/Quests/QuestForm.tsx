@@ -60,7 +60,7 @@ export function QuestForm({
                 expire_at: new Date(quest.expire_at || ""),
             });
         }
-    }, [open, quest]);
+    }, [open]);
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ export function QuestForm({
             ? route("quests.update", quest.id)
             : route("quests.create");
 
-        console.log(e.target)
+        console.log(e.target);
 
         method(routeName, {
             onSuccess: () => {
@@ -86,7 +86,7 @@ export function QuestForm({
     const addCategory = () => {
         if (newCategory.trim()) {
             const updated = [...data.categories, { name: newCategory.trim() }];
-            setData("categories", updated);
+            setData({ ...data, categories: updated });
             setNewCategory("");
             setQuest((prev) => ({
                 ...prev,
@@ -99,7 +99,7 @@ export function QuestForm({
         const updated = data.categories.filter(
             (cat) => cat.name !== categoryToRemove
         );
-        setData("categories", updated);
+        setData({ ...data, categories: updated });
         setQuest((prev) => ({
             ...prev,
             categories: updated,

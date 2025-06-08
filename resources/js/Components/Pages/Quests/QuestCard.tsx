@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Edit, Trash2 } from "lucide-react";
 import { getDifficultyColor, getStatusColor } from "@/lib/utils";
 import { Quest } from "@/types/interfaces/Quest";
+import { useForm } from "@inertiajs/react";
 
 interface QuestCardProps {
     quest: Quest;
@@ -17,6 +18,12 @@ export function QuestCard({
     setNewQuest,
     setIsCreateDialogOpen,
 }: QuestCardProps) {
+    const { delete: destory } = useForm({ id: "" });
+
+    const submitDelete = (e: React.FormEvent) => {
+        destory(route("quests.delete", quest.id));
+    };
+
     return (
         <Card className="border-border/40 bg-card/50 backdrop-blur-sm">
             <CardContent className="p-4">
@@ -99,14 +106,23 @@ export function QuestCard({
                             <Edit className="h-4 w-4" />
                             <span className="sr-only">Edit quest</span>
                         </Button>
-                        <Button
-                            size="sm"
-                            variant="ghost"
-                            className="h-8 w-8 p-0 text-red-400 hover:text-red-300"
-                        >
-                            <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete quest</span>
-                        </Button>
+                        <form onSubmit={submitDelete}>
+                            <input
+                                type="hidden"
+                                name="_method"
+                                value="DELETE"
+                            />
+
+                            <Button
+                                type="submit"
+                                size="sm"
+                                variant="ghost"
+                                className="h-8 w-8 p-0 text-red-400 hover:text-red-300"
+                            >
+                                <Trash2 className="h-4 w-4" />
+                                <span className="sr-only">Delete quest</span>
+                            </Button>
+                        </form>
                     </div>
                 </div>
             </CardContent>
