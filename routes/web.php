@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestController;
@@ -30,9 +31,7 @@ Route::middleware(['auth'])->prefix('quests')->name('quests.')->group(function (
 
 Route::middleware(['auth'])->get('/leaderboard', [UserController::class, 'index'])->name('leaderboard');
 
-Route::get('/admin', function () {
-    return Inertia::render('Admin');
-})->middleware(['auth'])->name('admin');
+Route::middleware(['auth'])->get('/admin', [AdminController::class, 'index'])->name('index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
