@@ -8,15 +8,23 @@ import { FlameIcon as Fire, User } from "lucide-react";
 import ApplicationLogo from "./ApplicationLogo";
 import { useState } from "react";
 
-const routes = [
-    { name: "Dashboard", route: "dashboard" },
-    { name: "Quests", route: "quests.index" },
-    { name: "Leaderboard", route: "leaderboard" },
-    { name: "Admin", route: "admin" },
-];
-
 export const Navbar: React.FC = () => {
     const user = usePage().props.auth.user;
+
+    let routes;
+    if (user.role !== "admin")
+        routes = [
+            { name: "Dashboard", route: "dashboard" },
+            { name: "Quests", route: "quests.index" },
+            { name: "Leaderboard", route: "leaderboard" },
+        ];
+    else
+        routes = [
+            { name: "Dashboard", route: "dashboard" },
+            { name: "Quests", route: "quests.index" },
+            { name: "Leaderboard", route: "leaderboard" },
+            { name: "Admin", route: "admin" },
+        ];
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
