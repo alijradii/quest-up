@@ -22,5 +22,7 @@ class AdminController extends Controller
 
     public function banUser(User $user) {
         $user->delete();
+
+        return redirect('/dashboard')->with('success', 'User was banned successfully.');
     }
 }
