@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Edit, Trash2 } from "lucide-react";
+import { Check, Circle, Edit, Trash2 } from "lucide-react";
 import { getDifficultyColor, getStatusColor } from "@/lib/utils";
 import { Quest } from "@/types/interfaces/Quest";
 import { useForm } from "@inertiajs/react";
@@ -19,9 +19,28 @@ export function QuestCard({
     setIsCreateDialogOpen,
 }: QuestCardProps) {
     const { delete: destory } = useForm({ id: "" });
+    const { put, reset } = useForm({});
 
     const submitDelete = (e: React.FormEvent) => {
         destory(route("quests.delete", quest.id));
+    };
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const method = put;
+        const routeName = route('quests.complete', quest.id);
+
+        console.log(e.target);
+
+        method(routeName, {
+            onSuccess: () => {
+                reset();
+            },
+            onError: (err) => {
+                console.log(err);
+            },
+        });
     };
 
     return (
@@ -29,10 +48,26 @@ export function QuestCard({
             <CardContent className="p-4">
                 <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3 flex-1">
-                        <Checkbox
-                            checked={quest.status === "complete"}
-                            className="mt-1"
-                        />
+                        <form onSubmit={submit}>
+                            <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-6 w-6 p-0 mt-1 hover:bg-accent/50"
+                                type="submit"
+                                disabled={quest.status === "complete"}
+                            >
+                                {quest.status === "complete" ? (
+                                    <Check className="h-4 w-4 text-green-600" />
+                                ) : (
+                                    <Circle className="h-4 w-4 text-muted-foreground" />
+                                )}
+                                <span className="sr-only">
+                                    {quest.status === "complete"
+                                        ? "Mark as incomplete"
+                                        : "Mark as complete"}
+                                </span>
+                            </Button>
+                        </form>
                         <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                                 <h3

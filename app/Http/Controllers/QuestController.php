@@ -114,7 +114,12 @@ class QuestController extends Controller
         }
 
         $quest->status = 'complete';
+        $quest->completed_at = now();
         $quest->save();
+
+        $user = Auth::user();
+        $user->completed_quests = $user->completed_quests + 1;
+        $user->save();
 
         return redirect('/dashboard')->with('success', 'Quest updated successfully!');
     }
