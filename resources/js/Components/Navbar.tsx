@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
             { name: "Dashboard", route: "dashboard" },
             { name: "Quests", route: "quests.index" },
             { name: "Leaderboard", route: "leaderboard" },
-            { name: "Admin", route: "admin" },
+            { name: "Admin", route: "admin.index" },
         ];
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =

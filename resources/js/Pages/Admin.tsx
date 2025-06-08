@@ -79,9 +79,9 @@ export default function AdminPage({ users }: Props) {
                             <TabsTrigger value="users">
                                 User Management
                             </TabsTrigger>
-                            <TabsTrigger value="quests">
+                            {/* <TabsTrigger value="quests">
                                 Quest Moderation
-                            </TabsTrigger>
+                            </TabsTrigger> */}
                         </TabsList>
 
                         <TabsContent value="users">
