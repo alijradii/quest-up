@@ -22,7 +22,7 @@ import {
     Hourglass,
 } from "lucide-react";
 import type { AdminUser } from "@/types/interfaces/Admin";
-import { usePage } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 
 interface UserProfileModalProps {
     user: AdminUser | null;
@@ -53,6 +53,28 @@ export function UserProfileModal({
         medium: "bg-yellow-100 text-yellow-800",
         hard: "bg-red-100 text-red-700",
     } as const;
+
+    const {post, reset} = useForm({});
+
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const method = post;
+        const routeName = route("admin.ban", user.id)
+
+        console.log(e.target);
+
+        method(routeName, {
+            onSuccess: () => {
+                reset();
+                onOpenChange(false);
+            },
+            onError: (err) => {
+                console.log(err);
+            },
+        });
+    };
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -269,7 +291,7 @@ export function UserProfileModal({
 
                     {/* Actions */}
                     <div className="flex justify-end gap-2">
-                        <form method="POST" action={route("admin.ban", user.id)}>
+                        <form onSubmit={submit}>
                             <Button disabled={disabled} variant="destructive" type="submit">
                                 Ban User
                             </Button>
